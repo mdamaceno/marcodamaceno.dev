@@ -1,0 +1,52 @@
+:root {
+    --main-font-color: #222;
+    --main-font-family: Georgia, 'Times New Roman', Times, serif;
+    --primary-color: #8c1eff;
+    --secondary-color: #ff901f;
+    --alert-color: #ff2975;
+    --warning-color: #ffd319;
+}
+
+html, body {
+    font-family: var(--main-font-family);
+    color: var(--main-font-color);
+    line-height: 1.7rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color);
+}
+
+#my-description {
+    background: rgb(250, 250, 250);
+    /* border-top: 10px double var(--primary-color); */
+    /* border-bottom: 10px double var(--primary-color); */
+    /* margin-top: .5em; */
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+#my-photo {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.main-content {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.main-photo {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.main-photo p {
+    background: url("/images/marcodamaceno.jpg") round;
+    margin: auto;
+    width: 10rem;
+    height: 10rem;
+    padding: 10%;
+    border: 6px double #fff;
+    border-radius: 50%;
+}

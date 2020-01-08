@@ -27,10 +27,47 @@ function getPostFilenames() {
   return names;
 }
 
-function buildHTML(name) {
-  const { html, metadata } = markdown2HTML(name);
+function buildHomeHTML() {
+  return `${top()}
+<div id="my-description">
+  <div class="main-content">
+    <div class="pure-g">
+      <div class="pure-u-2-5">
+        <div class="main-photo">
+          <p></p>
+        </div>
+      </div>
+      <div class="pure-u-3-5">
+        <h1>Marco Damaceno</h1>
+        <p>Sou um brasileiro que atualmente mora em Juiz de Fora - MG e que não gosta de chocolate e carnaval. Além disso, trabalho com desenvolvimento de software desde 2012. Desde então, venho aprimorando técnicas e adquirindo conhecimento. Minhas linguagens favoritas são Ruby, PHP e Javascript.</p>
 
-  return `${top(metadata)}${html}${bottom}`;
+        <p>Meu email: maadamaceno@gmail.com</p>
+    </div>
+  </div>
+</div>
+${bottom}`;
 }
 
-module.exports = { markdown2HTML, getPostFilenames, buildHTML };
+function buildPostsHTML(name) {
+  const { html, metadata } = markdown2HTML(name);
+
+  return `${top(metadata)}
+<div class="main-content pure-g">
+  <div class="pure-u-24-24">
+    ${html}
+  </div>
+</div>
+${bottom}`;
+}
+
+function getFile(name) {
+  return fs.readFileSync(path.join(process.env.INIT_CWD, 'public', `${name}`));
+}
+
+module.exports = {
+  markdown2HTML,
+  getPostFilenames,
+  buildPostsHTML,
+  buildHomeHTML,
+  getFile,
+};
