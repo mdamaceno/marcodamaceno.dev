@@ -1,8 +1,22 @@
 const showdown = require('showdown');
 const fs = require('fs');
 const path = require('path');
-const top = require('./default/top');
-const bottom = require('./default/bottom');
+
+function getFile(name) {
+  return fs.readFileSync(path.join(process.env.INIT_CWD, 'public', `${name}`));
+}
+
+function getComponent(name, params = {}) {
+  let content = fs.readFileSync(
+    path.join(__dirname, 'components', `${name}.html`),
+    { encoding: 'utf8' }
+  );
+  Object.keys(params).forEach(param => {
+    content = content.replace(`{{${param}}}`, params[param]);
+  });
+
+  return content;
+}
 
 function markdown2HTML(name) {
   const converter = new showdown.Converter({ metadata: true });
@@ -28,58 +42,24 @@ function getPostFilenames() {
 }
 
 function buildHomeHTML() {
-  return `${top()}
-<div id="my-social">
-  <div class="main-content">
-    <div class="pure-g">
-      <div class="pure-u-1-4">
-        <p class="social-media-name"><a href="/blog">BLOG</a></p>
-      </div>
-      <div class="pure-u-1-4">
-        <p class="social-media-name"><a href="https://github.com/mdamaceno" target="_blank">GITHUB</a></p>
-      </div>
-      <div class="pure-u-1-4">
-        <p class="social-media-name"><a href="https://www.linkedin.com/in/marcodamaceno/" target="_blank">LINKEDIN</a></p>
-      </div>
-      <div class="pure-u-1-4">
-        <p class="social-media-name"><a href="https://twitter.com/mdamaceno" target="_blank">TWITTER</a></p>
-      </div>
-    </div>
-  </div>
-</div>
-<div id="my-description">
-  <div class="main-content">
-    <div class="pure-g">
-      <div class="pure-u-2-5">
-        <div class="main-photo">
-          <p></p>
-        </div>
-      </div>
-      <div class="pure-u-3-5">
-        <h1>Marco Damaceno</h1>
-        <p>Sou um brasileiro que atualmente mora em Juiz de Fora - MG e que não gosta de chocolate e carnaval. Além disso, trabalho com desenvolvimento de software desde 2012. Desde então, venho aprimorando técnicas e adquirindo conhecimento. Minhas linguagens favoritas são Ruby, PHP e Javascript.</p>
-
-        <p>Meu email: maadamaceno@gmail.com</p>
-    </div>
-  </div>
-</div>
-${bottom}`;
+  return getComponent('layout/main', {
+    lang: 'pt-br',
+    title: 'Marco Damaceno',
+    content: `${getComponent('my-social')}${getComponent('my-description')}`,
+  });
 }
 
 function buildPostsHTML(name) {
   const { html, metadata } = markdown2HTML(name);
-
-  return `${top(metadata)}
-<div class="main-content pure-g">
-  <div class="pure-u-24-24">
-    ${html}
-  </div>
-</div>
-${bottom}`;
-}
-
-function getFile(name) {
-  return fs.readFileSync(path.join(process.env.INIT_CWD, 'public', `${name}`));
+  return getComponent('layout/main', {
+    lang: 'pt-br',
+    title:
+      metadata && metadata.title
+        ? `${metadata.title} - Marco Damaceno`
+        : 'Marco Damaceno',
+    description: metadata && metadata.description ? metadata.description : '',
+    content: `${getComponent('my-posts', { html })}`,
+  });
 }
 
 module.exports = {
