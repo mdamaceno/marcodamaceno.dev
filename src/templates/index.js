@@ -2,6 +2,11 @@ const showdown = require('showdown');
 const fs = require('fs');
 const path = require('path');
 
+require('dotenv').config();
+
+const APP_NAME = process.env.APP_NAME || '';
+const DEFAULT_LANG = process.env.DEFAULT_LANG || 'pt-br';
+
 function getFile(name) {
   return fs.readFileSync(path.join(process.env.INIT_CWD, 'public', `${name}`));
 }
@@ -43,8 +48,8 @@ function getPostFilenames() {
 
 function buildHomeHTML() {
   return getComponent('layout/main', {
-    lang: 'pt-br',
-    title: 'Marco Damaceno',
+    lang: DEFAULT_LANG,
+    title: APP_NAME,
     content: `${getComponent('my-social')}${getComponent('my-description')}`,
   });
 }
@@ -52,11 +57,8 @@ function buildHomeHTML() {
 function buildPostsHTML(name) {
   const { html, metadata } = markdown2HTML(name);
   return getComponent('layout/main', {
-    lang: 'pt-br',
-    title:
-      metadata && metadata.title
-        ? `${metadata.title} - Marco Damaceno`
-        : 'Marco Damaceno',
+    lang: DEFAULT_LANG,
+    title: metadata && metadata.title ? `${metadata.title} - ` : APP_NAME,
     description: metadata && metadata.description ? metadata.description : '',
     content: `${getComponent('my-posts', { html })}`,
   });
