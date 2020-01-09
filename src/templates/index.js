@@ -60,7 +60,7 @@ function buildPostsHTML(name) {
     lang: DEFAULT_LANG,
     title: metadata && metadata.title ? `${metadata.title} - ` : APP_NAME,
     description: metadata && metadata.description ? metadata.description : '',
-    content: `${getComponent('my-posts', { html })}`,
+    content: `${getComponent('my-posts', { html, metadata })}`,
   });
 }
 
