@@ -1,6 +1,6 @@
 {
-    "watch": ["src"],
-    "execMap": {
-      "js": "NODE_ENV=development node src/index.js"
-    }
+  "watch": ["src", ".env"],
+  "execMap": {
+    "js": "NODE_ENV=development node src/index.js"
   }
+}
