@@ -26,6 +26,16 @@ h1, h2, h3, h4, h5, h6 {
     padding-bottom: 1em;
 }
 
+#my-social {
+    background: var(--primary-color);
+    padding-top: .1em;
+    padding-bottom: .1em;
+}
+
+#my-social p {
+    text-align: center;
+}
+
 #my-photo {
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -49,4 +59,12 @@ h1, h2, h3, h4, h5, h6 {
     padding: 10%;
     border: 6px double #fff;
     border-radius: 50%;
+}
+
+.social-media-name a {
+    /* border: 1px solid #fff; */
+    border-radius: 5px;
+    color: #fff;
+    padding: 5px;
+    /* text-decoration: none; */
 }

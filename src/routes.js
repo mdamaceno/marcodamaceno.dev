@@ -1,4 +1,5 @@
 const path = require('path');
+const mimeTypes = require('./mimetypes');
 const {
   getPostFilenames,
   buildPostsHTML,
@@ -7,6 +8,8 @@ const {
 } = require('./templates');
 
 function selectRoute(request, response) {
+  const contentType = mimeTypes[path.extname(request.url)];
+
   const chooser = {
     get: {
       '/': () => {
@@ -16,17 +19,12 @@ function selectRoute(request, response) {
     },
   };
 
-  if (path.extname(request.url) === '.css') {
+  if (contentType) {
     chooser.get[request.url] = () => {
-      response.writeHead(200, { 'Content-Type': 'text/css' });
+      response.writeHead(200, {
+        'Content-Type': contentType,
+      });
       response.end(getFile(request.url), 'utf-8');
-    };
-  }
-
-  if (path.extname(request.url) === '.jpg') {
-    chooser.get[request.url] = () => {
-      response.writeHead(200, { 'Content-Type': 'image/jpg' });
-      response.end(getFile(request.url));
     };
   }
 

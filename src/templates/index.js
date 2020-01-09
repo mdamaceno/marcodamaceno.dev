@@ -29,6 +29,24 @@ function getPostFilenames() {
 
 function buildHomeHTML() {
   return `${top()}
+<div id="my-social">
+  <div class="main-content">
+    <div class="pure-g">
+      <div class="pure-u-1-4">
+        <p class="social-media-name"><a href="/blog">BLOG</a></p>
+      </div>
+      <div class="pure-u-1-4">
+        <p class="social-media-name"><a href="https://github.com/mdamaceno" target="_blank">GITHUB</a></p>
+      </div>
+      <div class="pure-u-1-4">
+        <p class="social-media-name"><a href="https://www.linkedin.com/in/marcodamaceno/" target="_blank">LINKEDIN</a></p>
+      </div>
+      <div class="pure-u-1-4">
+        <p class="social-media-name"><a href="https://twitter.com/mdamaceno" target="_blank">TWITTER</a></p>
+      </div>
+    </div>
+  </div>
+</div>
 <div id="my-description">
   <div class="main-content">
     <div class="pure-g">
