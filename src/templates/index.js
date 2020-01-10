@@ -13,7 +13,7 @@ function getFile(name) {
 
 function getComponent(name, params = {}) {
   let content = fs.readFileSync(
-    path.join(__dirname, 'components', `${name}.html`),
+    path.join(process.env.INIT_CWD, 'src/templates/components', `${name}.html`),
     { encoding: 'utf8' }
   );
   Object.keys(params).forEach(param => {
@@ -70,4 +70,5 @@ module.exports = {
   buildPostsHTML,
   buildHomeHTML,
   getFile,
+  getComponent,
 };
