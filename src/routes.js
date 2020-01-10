@@ -4,28 +4,13 @@ const controllers = require('./controllers');
 const { getPostFilenames } = require('./templates');
 
 function selectRoute(request, response) {
-  function responser(
-    content = '',
-    statusCode = 200,
-    headers = {},
-    options = {}
-  ) {
-    const contentHeader = Object.keys(headers).length
-      ? headers
-      : { 'Content-Type': 'text/html' };
-    const encoding = options.encoding || 'utf8';
-
-    response.writeHead(statusCode, contentHeader);
-    response.end(content, encoding);
-  }
-
   const contentType = mimeTypes[path.extname(request.url)];
   const {
     homeController,
     filesController,
     blogController,
     postsController,
-  } = controllers(request, responser);
+  } = controllers(request, response);
 
   const chooser = {
     get: {

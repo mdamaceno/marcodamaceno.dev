@@ -1,25 +1,38 @@
 /* eslint-disable no-console */
+const { createServer } = require('http');
+
 function makeServer(routes) {
-  return (request, response) => {
-    console.log('request ', request.url);
+  return (req, res) => {
+    console.log('request ', req.url);
+
+    function response(
+      content = '',
+      statusCode = 200,
+      headers = {},
+      options = {}
+    ) {
+      const contentHeader = Object.keys(headers).length
+        ? headers
+        : { 'Content-Type': 'text/html' };
+      const encoding = options.encoding || 'utf8';
+
+      res.writeHead(statusCode, contentHeader);
+      res.end(content, encoding);
+    }
 
     try {
-      const makeRoute = routes(request, response);
+      const makeRoute = routes(req, response);
 
       if (!makeRoute) {
-        response.writeHead(404, { 'Content-Type': 'text/html' });
-        response.end('<pre>Not found</pre>', 'utf-8');
+        return response('<pre>Not found</pre>', 404);
       }
 
       return makeRoute();
     } catch (error) {
       console.error(error);
-      response.writeHead(500, { 'Content-Type': 'text/html' });
-      response.end(`<pre>${error.stack}</pre>`, 'utf-8');
+      return response(`<pre>${error.stack}</pre>`, 500);
     }
-
-    return undefined;
   };
 }
 
-module.exports = makeServer;
+module.exports = routes => createServer(makeServer(routes));
