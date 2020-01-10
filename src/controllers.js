@@ -20,8 +20,12 @@ const controllers = (request, response) => {
         )}`,
       });
 
-      response.writeHead(200, { 'Content-Type': 'text/html' });
-      response.end(content, 'utf-8');
+      return response(content);
+    },
+
+    blogController: () => {
+      const content = getComponent('layout/main', { content: 'ola' });
+      return response(content);
     },
 
     postsController: name => {
@@ -34,13 +38,12 @@ const controllers = (request, response) => {
         content: `${getComponent('my-posts', { html, metadata })}`,
       });
 
-      response.writeHead(200, { 'Content-Type': 'text/html' });
-      response.end(content, 'utf-8');
+      return response(content);
     },
 
     filesController: () => {
-      response.writeHead(200, { 'Content-Type': contentType });
-      response.end(getFile(request.url), 'utf-8');
+      const headers = { 'Content-Type': contentType };
+      return response(getFile(request.url), 200, { headers });
     },
   };
 };
