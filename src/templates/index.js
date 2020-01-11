@@ -41,9 +41,20 @@ function getPostFilenames() {
   return names;
 }
 
+function getPostsMetadata() {
+  return getPostFilenames()
+    .map(name => markdown2HTML(name).metadata)
+    .filter(meta => Object.keys(meta).length)
+    .map(meta => ({
+      title: meta.title,
+      summary: meta.summary,
+    }));
+}
+
 module.exports = {
   markdown2HTML,
   getPostFilenames,
   getFile,
   getComponent,
+  getPostsMetadata,
 };

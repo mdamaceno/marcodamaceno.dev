@@ -1,4 +1,8 @@
-const { markdown2HTML, getComponent } = require('./templates');
+const {
+  markdown2HTML,
+  getComponent,
+  getPostsMetadata,
+} = require('./templates');
 
 require('dotenv').config();
 
@@ -8,6 +12,12 @@ const DEFAULT_LANG = process.env.DEFAULT_LANG || 'pt-br';
 const controllers = (request, response) => {
   return {
     homeController: () => {
+      const posts = getPostsMetadata();
+      let postsComponent = '';
+      posts.forEach(post => {
+        postsComponent += `<div><h1>${post.title}</h1><p>${post.summary}</p></div>`;
+      });
+
       const content = getComponent('layout/main', {
         lang: DEFAULT_LANG,
         title: APP_NAME,
@@ -15,7 +25,7 @@ const controllers = (request, response) => {
           getComponent('my-description') +
           getComponent('navbar') +
           getComponent('main', {
-            'list-posts': getComponent('list-posts'),
+            'list-posts': getComponent('list-posts', { posts: postsComponent }),
             sidebar: getComponent('sidebar'),
           }),
       });
