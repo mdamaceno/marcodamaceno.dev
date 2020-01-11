@@ -1,16 +1,14 @@
 const path = require('path');
 const mimeTypes = require('./mimetypes');
 const controllers = require('./controllers');
-const { getPostFilenames } = require('./templates');
+const { getPostFilenames, getFile } = require('./templates');
 
 function selectRoute(request, response) {
   const contentType = mimeTypes[path.extname(request.url)];
-  const {
-    homeController,
-    filesController,
-    blogController,
-    postsController,
-  } = controllers(request, response);
+  const { homeController, blogController, postsController } = controllers(
+    request,
+    response
+  );
 
   const chooser = {
     get: {
@@ -19,7 +17,9 @@ function selectRoute(request, response) {
     },
   };
 
-  if (contentType) chooser.get[request.url] = () => filesController();
+  if (contentType)
+    chooser.get[request.url] = () =>
+      response(getFile(request.url), 200, { 'Content-Type': contentType });
 
   getPostFilenames().forEach(name => {
     chooser.get[`/blog/${name}`] = () => postsController(name);
