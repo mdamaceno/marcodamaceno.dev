@@ -1,6 +1,7 @@
 const showdown = require('showdown');
 const fs = require('fs');
 const path = require('path');
+const readdirSyncDeep = require('recursive-readdir-synchronous');
 
 function getFile(name) {
   return fs.readFileSync(path.join(process.env.INIT_CWD, 'public', `${name}`));
@@ -18,10 +19,34 @@ function getComponent(name, params = {}) {
   return content;
 }
 
+function getPostFilenames() {
+  const baseDir = path.join(process.env.INIT_CWD, 'posts');
+  const files = readdirSyncDeep(baseDir);
+  const names = files
+    .map(file => file.replace(baseDir, ''))
+    .filter(file => path.extname(file) === '.md')
+    .filter(file => file.charAt(0) !== '_')
+    .map(file => file.replace('.md', ''))
+    .map(file => {
+      const basename = path.basename(file);
+      const splitName = basename.split('-');
+      const isoDate = `${splitName[0]}-${splitName[1]}-${splitName[2]}`;
+
+      return {
+        basename,
+        filename: file,
+        formattedFilename: file.replace(`${isoDate}-`, ''),
+        date: `${isoDate}`,
+      };
+    });
+
+  return names;
+}
+
 function markdown2HTML(name) {
   const converter = new showdown.Converter({ metadata: true });
   const content = fs.readFileSync(
-    path.join(process.env.INIT_CWD, 'posts', `${name}.md`),
+    path.join(process.env.INIT_CWD, 'posts', `${name.filename}.md`),
     { encoding: 'utf8' }
   );
 
@@ -31,23 +56,16 @@ function markdown2HTML(name) {
   return { html, metadata };
 }
 
-function getPostFilenames() {
-  const files = fs.readdirSync(path.join(process.env.INIT_CWD, 'posts'));
-  const names = files
-    .filter(file => path.extname(file) === '.md')
-    .filter(file => file.charAt(0) !== '_')
-    .map(file => path.basename(file, '.md'));
-
-  return names;
-}
-
 function getPostsMetadata() {
   return getPostFilenames()
-    .map(name => markdown2HTML(name).metadata)
-    .filter(meta => Object.keys(meta).length)
-    .map(meta => ({
-      title: meta.title,
-      summary: meta.summary,
+    .map(name => ({ name, meta: markdown2HTML(name).metadata }))
+    .filter(obj => Object.keys(obj.meta).length)
+    .map(obj => ({
+      title: obj.meta.title,
+      summary: obj.meta.summary,
+      date: obj.name.date,
+      url: obj.name.formattedFilename,
+      slug: obj.name.basename,
     }));
 }
 

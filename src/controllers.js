@@ -13,28 +13,24 @@ const controllers = (request, response) => {
   return {
     homeController: () => {
       const posts = getPostsMetadata();
-      let postsComponent = '';
-      posts.forEach(post => {
-        postsComponent += `<div><h1>${post.title}</h1><p>${post.summary}</p></div>`;
-      });
-
       const content = getComponent('layout/main', {
         lang: DEFAULT_LANG,
         title: APP_NAME,
         content:
           getComponent('my-description') +
           getComponent('navbar') +
-          getComponent('main', {
-            'list-posts': getComponent('list-posts', { posts: postsComponent }),
+          getComponent('blog', {
+            posts: posts.reduce((html, post) => {
+              return `${html}<div class="card post-title-card">
+                <div class="card-body">
+                  <a href="${post.url}">${post.title}</a> - <i>${post.date}</i>
+                </div>
+              </div>`;
+            }, ''),
             sidebar: getComponent('sidebar'),
           }),
       });
 
-      return response(content);
-    },
-
-    blogController: () => {
-      const content = getComponent('layout/main', { content: 'ola' });
       return response(content);
     },
 
