@@ -47,6 +47,14 @@ h1, h2, h3, h4, h5, h6 {
     color: #fff;
 }
 
+#post-navbar a:hover {
+    color: var(--secondary-color);
+}
+
+.social-icon {
+    vertical-align: middle;
+}
+
 #my-description {
     background: var(--primary-color);
     color: #fff;
@@ -57,6 +65,14 @@ h1, h2, h3, h4, h5, h6 {
 
 #my-description h1 {
     color: #fff;
+}
+
+#my-description a {
+    color: #fff;
+}
+
+#my-description a:hover {
+    color: var(--secondary-color);
 }
 
 #my-photo {
