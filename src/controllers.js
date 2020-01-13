@@ -36,15 +36,21 @@ const controllers = (request, response) => {
 
     postsController: name => {
       const { html, metadata } = markdown2HTML(name);
-      console.log(process.env.APP_NAME)
       const content = getComponent('layout/main', {
         lang: DEFAULT_LANG,
-        title: metadata && metadata.title ? `${metadata.title} - ` : APP_NAME,
+        title:
+          metadata && metadata.title
+            ? `${metadata.title} - ${APP_NAME}`
+            : APP_NAME,
         description:
           metadata && metadata.description ? metadata.description : '',
         content:
           getComponent('post/navbar') +
-          getComponent('post/post', { post: html, title: metadata.title }),
+          getComponent('post/post', {
+            post: html,
+            title: metadata.title,
+            createdAt: metadata.createdAt,
+          }),
       });
 
       return response(content);
