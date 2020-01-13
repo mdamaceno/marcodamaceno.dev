@@ -3,7 +3,7 @@ const { createServer } = require('http');
 
 function makeServer(routes) {
   return (req, res) => {
-    console.log('request ', req.url);
+    console.info('request ', req.url);
 
     function response(
       content = '',

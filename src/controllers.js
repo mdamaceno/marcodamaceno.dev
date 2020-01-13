@@ -12,7 +12,7 @@ const DEFAULT_LANG = process.env.DEFAULT_LANG || 'pt-br';
 const controllers = (request, response) => {
   return {
     homeController: () => {
-      const posts = getPostsMetadata();
+      const posts = getPostsMetadata().sort((a, b) => a - b);
       const content = getComponent('layout/main', {
         lang: DEFAULT_LANG,
         title: APP_NAME,
@@ -36,12 +36,15 @@ const controllers = (request, response) => {
 
     postsController: name => {
       const { html, metadata } = markdown2HTML(name);
+      console.log(process.env.APP_NAME)
       const content = getComponent('layout/main', {
         lang: DEFAULT_LANG,
         title: metadata && metadata.title ? `${metadata.title} - ` : APP_NAME,
         description:
           metadata && metadata.description ? metadata.description : '',
-        content: getComponent('my-posts', { html, metadata }),
+        content:
+          getComponent('post/navbar') +
+          getComponent('post/post', { post: html, title: metadata.title }),
       });
 
       return response(content);

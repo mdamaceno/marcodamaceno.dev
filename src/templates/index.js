@@ -52,6 +52,7 @@ function markdown2HTML(name) {
 
   const html = converter.makeHtml(content);
   const metadata = converter.getMetadata();
+  metadata.createdAt = name.date;
 
   return { html, metadata };
 }
@@ -59,7 +60,7 @@ function markdown2HTML(name) {
 function getPostsMetadata() {
   return getPostFilenames()
     .map(name => ({ name, meta: markdown2HTML(name).metadata }))
-    .filter(obj => Object.keys(obj.meta).length)
+    .filter(obj => Object.keys(obj.meta).length && obj.meta.title)
     .map(obj => ({
       title: obj.meta.title,
       summary: obj.meta.summary,
