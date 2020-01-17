@@ -13,7 +13,7 @@ function selectRoute(request, response) {
     },
   };
 
-  if (contentType)
+  if (contentType && process.env.NODE_ENV !== 'production')
     chooser.get[request.url] = () =>
       response(getFile(request.url), 200, { 'Content-Type': contentType });
 
