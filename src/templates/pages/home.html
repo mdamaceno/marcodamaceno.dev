@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="/styles/main.css">
+  <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+  <title>{{title}}</title>
+</head>
+<body>
+  <div id="my-description">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 main-photo">
+          <img src="/images/marcodamaceno.jpg" alt="">
+        </div>
+        <div class="col-md-9">
+          <h1>Marco Damaceno</h1>
+          <p>Sou um brasileiro que atualmente mora em Juiz de Fora - MG e que não gosta de chocolate e carnaval, mas gosta de açaí e bacon. Além disso, trabalho com desenvolvimento de software desde 2012. Desde então, venho aprimorando técnicas e adquirindo conhecimento. Minhas linguagens favoritas são Ruby, PHP e Javascript.</p>
+
+          <p>{{social}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="main-navbar">
+    <div class="container">
+      <div class="row">
+        <nav class="nav">
+          <!-- <a class="nav-link active" href="#">Home</a> -->
+          <!-- <a class="nav-link" href="#"><ion-icon name="logo-github"></ion-icon></a> -->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <main id="blog" class="container">
+    <div class="row">
+      <div id="list-posts" class="col-md-8">
+        {{posts}}
+      </div>
+      <div class="col-md-4">
+        <aside>
+          <div id="blog-sidebar">
+            <p>Arquivos</p>
+            <ul>
+              <li>Janeiro 2020</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
+
