@@ -23,7 +23,7 @@ Arranho um pouco de espanhol (obrigado futebol argentino) e não morro de fome e
 
 Quero aprender linguagens como Python, Rust e Elixir. Em 2019, eu cheguei a ver algumas coisas, mas não dei sequência. Espero que eu consiga aprender esse ano.
 
-Pretendo lançar uns projetos que me trarão retorno financeiro de forma passiva, afinal, naõ podemos colocar todos os ovos numa única cesta, não é mesmo? Ao longo do ano devo falar mais sobre isso.
+Pretendo lançar uns projetos que me trarão retorno financeiro de forma passiva, afinal, não podemos colocar todos os ovos numa única cesta, não é mesmo? Ao longo do ano devo falar mais sobre isso.
 
 Uma habilidade fora da área de programação que eu quero aprender é a massoterapia. Adoro ver vídeos de massagens no Youtube e já consigo aplicar algumas técnicas, mas uma orientação profissional e um curso são sempre bem vindos. Pena que na minha cidade não há muitas opções de cursos, mas não quero deixar de fazer.
 
