@@ -4,12 +4,12 @@ const path = require('path');
 const readdirSyncDeep = require('recursive-readdir-synchronous');
 
 function getFile(name) {
-  return fs.readFileSync(path.join(process.env.INIT_CWD, 'public', `${name}`));
+  return fs.readFileSync(path.join(process.cwd(), 'public', `${name}`));
 }
 
 function getComponent(name, params = {}) {
   let content = fs.readFileSync(
-    path.join(process.env.INIT_CWD, 'src/templates', `${name}.html`),
+    path.join(process.cwd(), 'src/templates', `${name}.html`),
     { encoding: 'utf8' }
   );
 
@@ -21,7 +21,7 @@ function getComponent(name, params = {}) {
 }
 
 function getPostFilenames() {
-  const baseDir = path.join(process.env.INIT_CWD, 'posts');
+  const baseDir = path.join(process.cwd(), 'posts');
   const files = readdirSyncDeep(baseDir);
   const names = files
     .map(file => file.replace(baseDir, ''))
@@ -47,7 +47,7 @@ function getPostFilenames() {
 function markdown2HTML(name) {
   const converter = new showdown.Converter({ metadata: true });
   const content = fs.readFileSync(
-    path.join(process.env.INIT_CWD, 'posts', `${name.filename}.md`),
+    path.join(process.cwd(), 'posts', `${name.filename}.md`),
     { encoding: 'utf8' }
   );
 

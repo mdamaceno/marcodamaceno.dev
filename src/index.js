@@ -3,7 +3,7 @@ const routes = require('./routes');
 
 require('dotenv').config();
 
-const port = process.env.APP_PORT;
+const port = process.env.APP_PORT || 8080;
 
 server(routes).listen(port);
 
