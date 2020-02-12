@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, escape
 import markdown2
 import glob
+from pathlib import Path
 
 app = Flask(__name__)
 
@@ -15,11 +16,22 @@ socialLinks = [
     }
 ]
 
+def draft_post(name):
+    return name[0] == '_'
+
+def getBasename(filepath):
+    return Path(filepath).stem
+
 @app.route('/')
 def index():
     files = glob.glob('posts/**/*.md')
     postsList = []
     for file in files:
+        basename = getBasename(file)
+
+        if draft_post(basename):
+            next()
+
         f = open(file, 'r', encoding='utf-8')
         data = f.read()
         f.close()
