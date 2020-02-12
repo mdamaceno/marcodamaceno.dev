@@ -1,42 +1,35 @@
+
+
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
 root = true
 
+# Unix-style newlines with a newline ending every file
 [*]
-charset=utf-8
-end_of_line=lf
-trim_trailing_whitespace = true
-insert_final_newline=true
-indent_style=space
-indent_size=4
+end_of_line = lf
+insert_final_newline = true
 
-[{*.ng,*.sht,*.html,*.shtm,*.shtml,*.htm,*.hbs,*.gql,*.graphql}]
-indent_style=space
-indent_size=2
+# Matches multiple files with brace expansion notation
+# Set default charset
+[*.{js,py}]
+charset = utf-8
 
-[{.babelrc,.stylelintrc,jest.config,.eslintrc,.prettierrc,*.json,*.jsb3,*.jsb2,*.bowerrc,*.graphqlconfig}]
-indent_style=space
-indent_size=2
+# 4 space indentation
+[*.py]
+indent_style = space
+indent_size = 4
 
-[{.sequelizerc,*.js,*.cjs}]
-indent_style=space
-indent_size=2
+# Tab indentation (no size specified)
+[Makefile]
+indent_style = tab
 
-[{*.es6,*.mjs}]
-indent_style=space
-indent_size=2
+# Indentation override for all JS under lib directory
+[lib/**.js]
+indent_style = space
+indent_size = 2
 
-[{jshint.json,*.jshintrc}]
-indent_style=space
-indent_size=2
-
-[{*.jscs.json,*.jscsrc}]
-indent_style=space
-indent_size=2
-
-[*.js.map]
-indent_style=space
-indent_size=2
-
-[{.analysis_options,*.yml,*.yaml}]
-indent_style=space
-indent_size=2
-
+# Matches the exact files either package.json or .travis.yml
+[{package.json,.travis.yml}]
+indent_style = space
+indent_size = 2

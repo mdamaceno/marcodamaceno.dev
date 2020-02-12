@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+{% with title=post.title %}
+{% include 'partials/head.html' %}
+{% endwith %}
+
+<body>
+  {% with socialLinks=socialLinks %}
+  {% include 'partials/blog-navbar.html' %}
+  {% endwith %}
+
+  <div id="my-post">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card post-content-card">
+            {% block content %}{% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

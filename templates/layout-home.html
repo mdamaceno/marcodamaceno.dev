@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+{% with title=title %}
+{% include 'partials/head.html' %}
+{% endwith %}
+
+<body>
+  {% include 'partials/my-description.html' %}
+
+  {% with socialLinks=socialLinks %}
+  {% include 'partials/home-navbar.html' %}
+  {% endwith %}
+
+  <main id="blog" class="container">
+    <div class="row">
+      <div id="list-posts" class="col-md-8">
+        {% for post in posts %}
+        <div class="card post-title-card">
+          <div class="card-body">
+            <a href="{{ post.url }}">{{ post.title }}</a> - <i>{{ post.created_at }}</i>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="col-md-4">
+        <aside>
+          <div id="blog-sidebar">
+            <p>Arquivos</p>
+            <ul>
+              <li>Janeiro 2020</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<div id="post-navbar">
+  <div class="container">
+    <div class="row">
+      <nav class="col-md-6">
+        <ul class="nav">
+          <li class="nav-item text-left">
+            <a class="nav-link" href="/"><strong>Marco Damaceno</strong></a>
+          </li>
+        </ul>
+      </nav>
+      <nav class="col-md-6">
+        <ul class="nav justify-content-end">
+          {% for social in socialLinks %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ social.url }}" target="_blank">
+              <ion-icon class="social-icon" name="{{ social.icon }}"></ion-icon>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

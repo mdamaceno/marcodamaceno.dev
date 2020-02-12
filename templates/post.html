@@ -1,0 +1,9 @@
+{% extends 'layout-blog.html' %}
+
+{% block content %}
+<div class="card-header">
+  <span class="card-subtitle mb-2 text-muted">{{ post.created_at }}</span>
+  <h1>{{ post.title }}</h1>
+</div>
+<div class="card-body">{{ post.content|safe }}</div>
+{% endblock %}

@@ -1,0 +1,123 @@
+:root {
+    --main-font-color: #222;
+    --main-font-family: Georgia, 'Times New Roman', Times, serif;
+    --primary-color: #8c1eff;
+    --secondary-color: #ff901f;
+    --alert-color: #ff2975;
+    --warning-color: #ffd319;
+}
+
+html, body {
+    background: #eee;
+    font-family: var(--main-font-family);
+    color: var(--main-font-color);
+}
+
+body a {
+    color: var(--primary-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color);
+}
+
+#blog {
+    margin-top: 1em;
+}
+
+#main-navbar {
+    background: #333;
+    padding: .2rem 0;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+#main-navbar a {
+    color: #eedfff;
+}
+
+#post-navbar {
+    background: var(--primary-color);
+    color: #fff;
+    padding: .2rem 0;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+#post-navbar a {
+    color: #fff;
+}
+
+#post-navbar a:hover {
+    color: var(--secondary-color);
+}
+
+.social-icon {
+    vertical-align: middle;
+}
+
+#my-description {
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 1.3rem;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+#my-description h1 {
+    color: #fff;
+}
+
+#my-description a {
+    color: #fff;
+}
+
+#my-description a:hover {
+    color: var(--secondary-color);
+}
+
+#my-photo {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.main-photo img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.social-media-name a {
+    color: var(--primary-color);
+    border-top: 1px solid var(--secondary-color);
+    border-bottom: 1px solid var(--secondary-color);
+    padding: 5px;
+    text-decoration: none;
+}
+
+#list-posts p {
+    font-size: 1.2rem;
+    line-height: 1.8em;
+}
+
+.post-title-card, .post-content-card {
+    /* background: #eedfff; */
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    border: 1px solid var(--primary-color);
+}
+
+.post-content-card {
+    line-height: 2.3rem;
+}
+
+#blog-sidebar {
+    font-size: 1.3rem;
+}
+
+#blog-sidebar p {
+    color: #333;
+    font-weight: bold;
+}
+
+#my-post h1 {
+    color: #333;
+}

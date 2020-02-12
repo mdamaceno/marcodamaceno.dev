@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -e
+
+echo "====> Cleaning..."
+
+rm -rf ./build
+
+echo "====> Building..."
+
+source ./venv/bin/activate
+python app.py &
+APP_PID=$!
+sleep 3
+wget -P build -nv -nH -r -E localhost:5000
+kill $APP_PID
+
+echo "====> Finish!"

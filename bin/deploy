@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+echo "====> Deploying..."
+
+# ssh $USR@$SERVER "rm -rf $BLOG_DIR && mkdir $BLOG_DIR"
+ssh $USR@$SERVER "rm -rf $BLOG_DIR/*"
+scp -r build/* $USR@$SERVER:$BLOG_DIR
+
+echo "====> Finish!"

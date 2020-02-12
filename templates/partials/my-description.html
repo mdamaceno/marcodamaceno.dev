@@ -1,0 +1,24 @@
+<div id="my-description">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 main-photo">
+        <img src="{{ url_for('static', filename='images/marcodamaceno.jpg') }}" alt="foto de Marco Damaceno">
+      </div>
+      <div class="col-md-9">
+        <h1>Marco Damaceno</h1>
+        <p>Sou um brasileiro que atualmente mora em Juiz de Fora - MG e que não gosta de chocolate e carnaval, mas
+          gosta de açaí e bacon. Além disso, trabalho com desenvolvimento de software desde 2012. Desde então, venho
+          aprimorando técnicas e adquirindo conhecimento. Minhas linguagens favoritas são Ruby, PHP e Javascript.</p>
+
+        <p>
+          {% for social in socialLinks %}
+          <a href="{{ social.url }}" target="_blank">
+            <ion-icon class="social-icon" name="{{ social.icon }}"></ion-icon>
+          </a>
+          {% endfor %}
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>
