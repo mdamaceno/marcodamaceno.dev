@@ -16,21 +16,17 @@ socialLinks = [
     }
 ]
 
-def draft_post(name):
-    return name[0] == '_'
-
-def getBasename(filepath):
-    return Path(filepath).stem
+def draft_post(filepath):
+    basename = Path(filepath).stem
+    return basename[0] == '_'
 
 @app.route('/')
 def index():
     files = glob.glob('posts/**/*.md')
     postsList = []
     for file in files:
-        basename = getBasename(file)
-
-        if draft_post(basename):
-            next()
+        if draft_post(file):
+            continue
 
         f = open(file, 'r', encoding='utf-8')
         data = f.read()
@@ -43,7 +39,16 @@ def index():
             'url': '/blog/' + file.replace('.md', '')
         })
 
-    return render_template('layout-home.html', title='Marco Damaceno', posts=postsList, socialLinks=socialLinks)
+    return render_template(
+        'layout-home.html',
+        title='Marco Damaceno',
+        posts=sorted(
+            postsList,
+            key=lambda item: item['created_at'],
+            reverse=True
+        ),
+        socialLinks=socialLinks
+    )
 
 @app.route('/blog/posts/<category>/<name>')
 def show_post(category, name):
