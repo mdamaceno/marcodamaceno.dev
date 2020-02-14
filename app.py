@@ -2,6 +2,9 @@ from flask import Flask, render_template, request, escape
 import markdown2
 import glob
 from pathlib import Path
+import os
+
+APP_ENV = os.environ.get('APP_ENV', 'development')
 
 app = Flask(__name__)
 
@@ -22,6 +25,7 @@ def draft_post(filepath):
 
 @app.route('/')
 def index():
+    print(APP_ENV)
     files = glob.glob('posts/**/*.md')
     postsList = []
     for file in files:
@@ -47,7 +51,8 @@ def index():
             key=lambda item: item['created_at'],
             reverse=True
         ),
-        socialLinks=socialLinks
+        socialLinks=socialLinks,
+        app_env=APP_ENV
     )
 
 @app.route('/blog/posts/<category>/<name>')
@@ -64,7 +69,7 @@ def show_post(category, name):
         'content': html
     }
 
-    return render_template('post.html', post=post, socialLinks=socialLinks)
+    return render_template('post.html', post=post, socialLinks=socialLinks, app_env=APP_ENV)
 
 if __name__ == '__main__':
     app.run(debug=True)
